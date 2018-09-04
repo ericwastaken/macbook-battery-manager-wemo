@@ -90,7 +90,7 @@ $ ./macbook-battery-manager.js
 ```
 
 Once the command starts, you'll see output similar to:
-```bash
+```text
 Battery manager starting up...
 Looking for your-device-name...
 Wemo Switch found: your-device-name. Will maintain 70% +/- 7%.
@@ -98,7 +98,7 @@ Switch your-device-name is off
 ```
 
 Or if you enable verbose:
-```bash
+```text
 Battery manager starting up...
 Looking for your-device-name...
 Wemo Switch found: your-device-name. Will maintain 70% +/- 7%.
