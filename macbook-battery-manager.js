@@ -5,6 +5,8 @@ console.log(`macbook-battery-manager starting up...`);
 
 // Early Dependencies
 const fs = require('fs');
+const program = require('commander');
+const pkg = require('./package.json');
 
 /**
  * Logs a message and bails out from the node process.
@@ -16,26 +18,11 @@ function bailOut(msg) {
   process.exit(-1);
 }
 
-let config;
-if (fs.existsSync('./config.js')) {
-  config = require('./config.js');
-} else {
-  bailOut(`Error. You are missing the config.js file. If you just installed this utility, 
-  copy the config-template.js into config.js as a place to get started! Don't forget to 
-  edit the new config.js to suit your needs.`);
-}
+// Setup the CL parameters & verify we received what we need
+// Note, this method will stop the node process if the CL parameters are not correct!
+setupProgramOptions();
 
-// Sanity Check. No Config? No Cigar!
-if (config.controlSwitch === "" ||
-    !config.controlSwitch ||
-    config.batteryCheckIntervalMinutes < 1 ||
-    config.percentTolerance < 1 ||
-    config.percentTolerance > 30 ||
-    config.percentTarget < 10 ||
-    config.percentTarget > 90
-) {
-  bailOut('Please check your config.js as it contains nonsensical values!');
-}
+// ASSERT, we have the proper CLI arguments.
 
 // Full Dependencies
 const Wemo = require('wemo-client');
@@ -45,18 +32,79 @@ const macOsBattery = require('macos-battery');
 const wemo = new Wemo();
 
 // Config mapped into local constants
-const controlSwitch = config.controlSwitch;
-const percentTarget = config.percentTarget;
-const verboseLog = config.verboseLog;
-const percentTolerance = config.percentTolerance;
-const batteryCheckIntervalMinutes = config.batteryCheckIntervalMinutes;
-
-// TODO: Add logic to bind percentTarget to 20 to 90
+const controlSwitch = program.switchname;
+const percentTarget = program.percent;
+const percentTolerance = program.tolerance;
+const batteryCheckIntervalMinutes = program.interval;
+const verboseLog = program.verbose;
 
 // Globals
 let switchState = 'off';
 let deviceClient = null;
 let intervalHandle = null;
+
+/**
+ * Declare Package Methods - START
+ */
+
+/**
+ * Sets up the CL options and arguments.
+ *
+ */
+function setupProgramOptions() {
+  // Setup the various CL arguments
+  program
+      .version(pkg.version)
+      .option(
+          '-s, --switchname <"switch name">',`
+          The name of the Wemo switch to control. Must match the name in your Wemo app.`
+      )
+      .option(
+          '-p, --percent <n>',`
+          The battery target percent to aim for (this will be maintained within the tolerance). 
+          Must be between 30 & 90 inclusive.`,
+          parseInt
+      )
+      .option(
+          '-t, --tolerance <n>',`
+          Battery percent tolerance (battery will be maintained at target percent +/- tolerance). 
+          Must be between 1 & 30 inclusive. Percent - tolerance must be >= 20. Percent + tolerance must be <= 90.`,
+          parseInt
+      )
+      .option(
+          '-i, --interval <n>',`
+          The interval at which to check for battery charge (in minutes). Must be >= 1`,
+          parseInt
+      )
+      .option(
+          '-v, --verbose',`
+          Produce verbose logging (outputs logs on every interval check).`
+      )
+      .parse(process.argv);
+
+  // Ensure we received mandatory parameters.
+  if (!program.switchname || !program.percent || !program.tolerance || !program.interval) {
+    program.outputHelp();
+    console.log('');
+    process.exit(-1);
+  }
+
+  // Sanity Check. No Config? No Cigar!
+  if (program.switchname === "" ||
+      program.interval < 1 ||
+      program.tolerance < 1 ||
+      program.tolerance > 30 ||
+      program.percent < 30 ||
+      program.percent > 90 ||
+      program.percent - program.tolerance < 20 ||
+      program.percent + program.tolerance > 90
+  ) {
+    program.outputHelp();
+    console.log('');
+    process.exit(-1);
+  }
+
+}
 
 /**
  * A callback for wemo.discover, this method checks for a specific Wemo switch name
@@ -164,6 +212,15 @@ function logVerbose(msg) {
     process.stdout.write(msg + '\n');
   }
 }
+
+/**
+ * Declare Package Methods - END
+ */
+
+
+/**
+ * Fire off the Wemo discover, which starts up the package's loop.
+ */
 
 // Discover messaging
 console.log(`Looking for ${controlSwitch}...`);

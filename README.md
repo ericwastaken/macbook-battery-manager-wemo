@@ -34,22 +34,72 @@ To install this utility globally:
 $ npm install -g macbook-battery-manager-wemo
 ```
 
-## Config
+## Usage
 
-To begin using this utility, you must first make a copy of the config template provided. You can do that with then following commands in terminal:
+Run this utility with command line arguments to suit your needs. 
+
+For example, to control a switch called **macbookswitch** so that it maintans a 70% charge
++/- 10% with a check interval of every 5 minutes:
+
 ```bash
-$ cp config-template.js config.js
+$ macbook-battery-manager.js \
+  -s "macbookswitch" \
+  -p 70 \
+  -t 10 \
+  -i 5
 ```
 
-After this, simply edit **config.js** with your favorite editor and set values to suit.
+Or using the long arguments:
 
-The various configuration options are:
+```bash
+$ macbook-battery-manager.js \
+  --switchname "macbookswitch" \
+  --percent 70 \
+  --tolerance 10 \
+  --interval 5
+
+```
+
+> You can also execute the command in a single line! We broke it up into multiple
+> lines using the '\\' line continuation character for redability.
+
+The command line arguments are as follows:
   
-  - controlSwitch: The name of the Wemo switch to control. Must match the name in your Wemo app.  
-  - percentTarget: The target battery percentage to aim for (this will be maintained within the tolerance).
-  - percentTolerance: The battery percent tolerance (battery will be maintained at target +/- tolerance).
-  - batteryCheckIntervalMinutes: The interval at which to check the current battery charge (in minutes).
-  - verboseLog: When set to true, produces verbose logging (outputs logs on every interval check).
+  - (required) -s, --switchname "switch name"
+      - The name of the Wemo switch to control. Must match the name in your Wemo app.
+  - (required) -p, --percent \[integer\]
+      - The battery target percent to aim for (this will be maintained within the tolerance).
+        Must be between 30 & 90 inclusive.
+  - (required) -t, --tolerance \[integer\]
+      - Battery percent tolerance (battery will be maintained at target percent +/- tolerance).
+        Must be between 1 & 30 inclusive. Percent - tolerance must be >= 20. Percent + tolerance must be <= 90.
+  - (required) -i, --interval \[integer\]
+      - The interval at which to check for battery charge (in minutes). Must be >= 1
+  - (optional) -v, --verbose
+      - Produce verbose logging (outputs logs on every interval check).
+
+
+Once the command starts, you'll see output similar to:
+```text
+Battery manager starting up...
+Looking for your-device-name...
+Wemo Switch found: your-device-name. Will maintain 70% +/- 7%.
+Switch your-device-name is off
+```
+
+Or if you enable verbose:
+```text
+Battery manager starting up...
+Looking for your-device-name...
+Wemo Switch found: your-device-name. Will maintain 70% +/- 7%.
+Target: 70% +/- 7%, Current: 92%, Ensuring switch is off.
+Switch your-device-name is off
+Target: 70% +/- 7%, Current: 89%, Ensuring switch is off.
+Target: 70% +/- 7%, Current: 87%, Ensuring switch is off.
+```
+
+To stop the utility, simply press **CTRL+C**. Ensure that the Wemo switch is at the desired setting once you stop the utility. All Wemo switches
+have an on/off button you can manually press.
 
 ## FAQ
 
@@ -80,36 +130,6 @@ you'll need to research and decide for yourself.
   but most home users (and even small businesses) likely won't have taken the time to do this.
   - Caveat: It's possible that I never bothered to enable device authentication on my Wemo switches, though I honestly don't remember seeing such a thing in any of the Wemo setup wizards or prompts!
   If you know something about the security of these devices, by all means let me know. Open an issue and let me know your thoughts.
-
-## Usage
-
-Once you have setup a **config.js** with parameters to suit your needs simply open a terminal window and run.
-
-```bash
-$ ./macbook-battery-manager.js
-```
-
-Once the command starts, you'll see output similar to:
-```text
-Battery manager starting up...
-Looking for your-device-name...
-Wemo Switch found: your-device-name. Will maintain 70% +/- 7%.
-Switch your-device-name is off
-```
-
-Or if you enable verbose:
-```text
-Battery manager starting up...
-Looking for your-device-name...
-Wemo Switch found: your-device-name. Will maintain 70% +/- 7%.
-Target: 70% +/- 7%, Current: 92%, Ensuring switch is off.
-Switch your-device-name is off
-Target: 70% +/- 7%, Current: 89%, Ensuring switch is off.
-Target: 70% +/- 7%, Current: 87%, Ensuring switch is off.
-```
-
-To stop the utility, simply press **CTRL+C**. Ensure that the Wemo switch is at the desired setting once you stop the utility. All Wemo switches
-have an on/off button you can manually press.
 
 ## Requirements
 
