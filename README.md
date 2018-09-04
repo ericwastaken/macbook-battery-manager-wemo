@@ -36,13 +36,13 @@ $ npm install -g macbook-battery-manager-wemo
 
 ## Usage
 
-Run this utility with command line arguments to suit your needs. 
+After installing globally, run this utility with command line arguments to suit your needs. 
 
 For example, to control a switch called **macbookswitch** so that it maintans a 70% charge
 +/- 10% with a check interval of every 5 minutes:
 
 ```bash
-$ macbook-battery-manager.js \
+$ macbook-battery-manager-wemo \
   -s "macbookswitch" \
   -p 70 \
   -t 10 \
@@ -52,7 +52,7 @@ $ macbook-battery-manager.js \
 Or using the long arguments:
 
 ```bash
-$ macbook-battery-manager.js \
+$ macbook-battery-manager-wemo \
   --switchname "macbookswitch" \
   --percent 70 \
   --tolerance 10 \
