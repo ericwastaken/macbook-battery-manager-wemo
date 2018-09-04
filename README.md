@@ -6,7 +6,7 @@
 
 ## Disclaimer
 
-I AM NOT A BATTERY EXPERT. THIS UTILITY MIGHT DAMAGE YOUR MACBOOK BATTERY. USE THIS SETUP AT YOUR OWN RISK. 
+I AM NOT A BATTERY EXPERT. IF DONE INCORRECTLY, SWITCHING POWER ON/OFF YOUR MACBOOK CHARGER EXCESSIVELY COULD SHORTEN YOUR MACBOOK'S BATTERY LIFE, EVEN DAMAGE IT. USE THIS UTILITY AND SETUP AT YOUR OWN RISK AFTER YOU'VE FULLY UNDERSTOOD ITS PURPOSE! 
 
 ## Summary
 
@@ -17,7 +17,9 @@ that are always plugged into power.
 Apple's own website states that if a device is to be stored long term, the battery should be charged to 50% ("Store it half-charged when you store it long term"), even going as far as
 recommending that the device battery be topped off to 50% at least every six months. See [Maximizing Battery Life and Lifespan](https://www.apple.com/batteries/maximizing-performance/).
 
-Despite this recommendation, Macbooks and macOS provide no mechanism to hold a notebook's charge at a certain percent when it's always connected to power.
+Search the web for keywords like "extending battery performance" will yeild countless results with extensive opinions.
+
+Despite the above, Macbooks and macOS provide no mechanism to hold a notebook's charge at a certain percent when it is always connected to power.
 
 I've read of some people hacking the charge cable to achieve some charge blocking, but messing with a cable seemed like a bad idea to me, though I admit possibly managing battery by switching power 
 on/off very frequently might be equally as bad (maybe worse)!
