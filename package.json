@@ -6,7 +6,11 @@
   },
   "version": "2.0.0",
   "description": "Manages your Macbook battery, holding at a certain charge percent, using a Wemo light switch.",
-  "main": "macbook-battery-manager.js",
+  "main": "./macbook-battery-manager.js",
+  "bin": {
+    "macbook-battery-manager-wemo": "./macbook-battery-manager.js"
+  },
+  "preferGlobal": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
