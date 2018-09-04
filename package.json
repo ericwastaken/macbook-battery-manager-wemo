@@ -1,13 +1,26 @@
 {
   "name": "macbook-battery-manager-wemo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ericwastaken/macbook-battery-manager-wemo.git"
+  },
   "version": "1.0.0",
-  "description": "Manages your Macbook battery, holding at a certain charge percent, using a WeMo light switch.",
+  "description": "Manages your Macbook battery, holding at a certain charge percent, using a Wemo light switch.",
   "main": "macbook-battery-manager.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "E.A.Soto easoto@iss-pr.com",
+  "keywords": [
+    "macOS battery",
+    "battery charge state",
+    "battery charge percent",
+    "osx battery"
+  ],
+  "author": "E.A.Soto, easoto@iss-pr.com",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ericwastaken/macbook-battery-manager-wemo/issues"
+  },
   "dependencies": {
     "macos-battery": "^1.1.0",
     "wemo-client": "^0.15.0"
