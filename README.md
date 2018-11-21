@@ -6,9 +6,8 @@
 
 ## Disclaimer
 
-I AM NOT A BATTERY EXPERT. IF DONE INCORRECTLY, EXCESSIVELY SWITCHING THE POWER ON AND OFF TO YOUR MACBOOK 
-CHARGER COULD SHORTEN YOUR MACBOOK'S BATTERY LIFE, EVEN DAMAGE IT. USE THIS UTILITY AND SETUP AT YOUR OWN 
-RISK AFTER YOU'VE FULLY UNDERSTOOD ITS PURPOSE! 
+I AM NOT A BATTERY EXPERT. HOWEVER, EXCESSIVELY SWITCHING THE POWER ON AND OFF TO YOUR MACBOOK 
+CHARGER WILL SHORTEN YOUR MACBOOK'S BATTERY LIFE. IT MIGHT EVEN DAMAGE IT THE BATTERY REQUIRING A POTENTIALLY COSTLY REPAIR. USE THIS UTILITY AND SETUP AT YOUR OWN RISK AFTER YOU'VE FULLY UNDERSTOOD ITS PURPOSE! I DO NOT RECOMMEND USING THIS FOR VERY LONG. USE IT ONLY FOR TESTING AND EXPERIMENTING.
 
 ## Summary
 
@@ -20,14 +19,14 @@ Apple's own website states that if a device is to be stored long term, the batte
 half-charged when you store it long term"), even going as far as recommending that the device battery be topped off to 
 50% at least every six months. See [Maximizing Battery Life and Lifespan](https://www.apple.com/batteries/maximizing-performance/).
 
-Search the web for keywords like "extending battery performance" will yeild countless results with extensive opinions.
+Search the web for keywords like "extending battery performance" will yield countless results with extensive opinions.
 
 Despite the above, Macbooks and macOS provide no mechanism to hold a notebook's charge at a certain percent when it is 
 always connected to power.
 
 I've read of some people hacking the charge cable to achieve some charge blocking, but messing with a cable seemed like 
 a bad idea to me, though I admit possibly managing battery by switching power on/off very frequently might be equally as
-bad (maybe worse)!
+bad (likely worse)!
 
 Enter this command line utility: when running on a Macbook that is also plugged into a Wemo switch, this utility will 
 monitor the notebook's charge and then either flip the Wemo switch on or off to maintain the desired charge +/- a tolerance.
@@ -35,7 +34,7 @@ monitor the notebook's charge and then either flip the Wemo switch on or off to 
 By the way, I don't recommend using this for more than just playing/testing. Why? Charing/discharging like this will eat 
 up charge cycles on your Macbook's battery at an increased rate. For instance, in 4 to 6 hours of testing, I saw two 
 charge cycles added to my Macbook's battery charge cycle count. As I am not a battery expert, I'm not sure what the long 
-term impact is on the battery of coming close to, or even exceeding this charge cycle count!
+term impact is on the battery of coming close to, or even exceeding this charge cycle count! Also, charging like this for short periods of time, repeatedly, likely causes temperature fluctuations in the battery that are not usual. In short, this is a project for learning and experimentation and I do not recommend using it for anything other than learning for a short period of time!
 
 ## Installation
 
@@ -119,8 +118,7 @@ utility. All Wemo switches have an on/off button you can manually press.
 you'll need to research and decide for yourself.
 - What setting do I use?
   - I wrote this utility for fun and to experiment with Wemo switches doing something useful, so I'm not actually using it 
-  regularly because I don't have enough experience nor data! I am publishing
-  with the hope that others will also try it (possibly in limited fashion) and provide me feedback. However, if I was going 
+  regularly because it's a bad idea and will likely damage the battery! However, if I was going 
   to use it, I would likely keep charge at 70% +/- 10% based on what I've been reading on various posts. 
 - What the heck is a Wemo switch?
   - Wemo switches are power outlets made by Belkin that can be controlled via a Belkin supplied app as well as other
